@@ -18,13 +18,15 @@ function Home() {
     console.log("TodoList Changed");
   }, [TodoList]);
 
-  const DisplayTodoList = TodoList.map((item) => (
-    <Task key={item.id} TaskInfo={item} />
-  ));
-
   return (
     <TodoContext.Provider value={[TodoList, setTodoList]}>
-      <Grid container rowSpacing={3} p={3}>
+      <Grid
+        container
+        style={{ margin: "auto" }}
+        width={400}
+        rowSpacing={3}
+        p={3}
+      >
         <Grid item xs={12}>
           <FetchFromServer setTodoList={setTodoList} />
         </Grid>
@@ -32,7 +34,9 @@ function Home() {
         <TodoForm TodoList={TodoList} setTodoList={setTodoList} />
 
         <Grid item xs={12}>
-          {DisplayTodoList}
+          {TodoList.map((item) => (
+            <Task data-testid="Task" key={item.id} TaskInfo={item} />
+          ))}
         </Grid>
       </Grid>
     </TodoContext.Provider>

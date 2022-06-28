@@ -22,12 +22,13 @@ function Task({ TaskInfo }) {
     );
   };
 
-  const handleRemove = (idx) => {
+  const handleRemove = (e, idx) => {
+    e.stopPropagation();
     setTodoList(TodoList.filter((item) => item.id !== idx));
   };
 
   return (
-    <ListItemButton>
+    <ListItemButton onClick={handleCompletedChange}>
       <Checkbox
         edge="start"
         checked={TaskInfo.completed}
@@ -38,7 +39,6 @@ function Task({ TaskInfo }) {
       />
 
       <ListItemText
-        onClick={handleCompletedChange}
         style={{
           textDecoration: TaskInfo.completed ? "line-through" : "none",
         }}
@@ -47,7 +47,7 @@ function Task({ TaskInfo }) {
       />
 
       <IconButton
-        onClick={() => handleRemove(TaskInfo.id)}
+        onClick={(e) => handleRemove(e, TaskInfo.id)}
         edge="end"
         aria-label="delete"
       >

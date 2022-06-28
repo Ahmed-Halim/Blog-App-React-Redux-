@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { v4 as uuid } from "uuid";
 import { Button, TextField } from "@mui/material";
 import { Grid } from "@mui/material";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
 function TodoForm({ TodoList, setTodoList }) {
   const [inputValue, setInputValue] = useState("");
@@ -19,6 +20,7 @@ function TodoForm({ TodoList, setTodoList }) {
     <>
       <Grid item xs={12}>
         <TextField
+          data-testid="NewTaskTextField"
           id="outlined-basic"
           label="Create new task"
           variant="outlined"
@@ -33,8 +35,10 @@ function TodoForm({ TodoList, setTodoList }) {
 
       <Grid item xs={12}>
         <Button
+          data-testid="AddTask"
           variant="contained"
           size="large"
+          startIcon={<AddCircleOutlineIcon />}
           onClick={() => addTask(inputValue)}
         >
           Add Task
