@@ -1,23 +1,11 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from "./Pages/Layout";
-import Home from "./Pages/Home";
-import Posts from "./Pages/Posts.js";
-import Contact from "./Pages/Contact.js";
-import NoPage from "./Pages/NoPage";
+import React, { StrictMode } from "react";
+import Posts from "./App/Features/Posts/Posts.js";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="posts" element={<Posts />} />
-          <Route path="posts/:id" element={<Posts />} />
-          <Route path="contact" element={<Contact />} />
-          <Route path="*" element={<NoPage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <StrictMode>
+      <Posts />
+    </StrictMode>
   );
 }
 
