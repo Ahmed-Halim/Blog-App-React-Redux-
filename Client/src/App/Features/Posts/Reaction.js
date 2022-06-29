@@ -2,27 +2,30 @@ import React from "react";
 import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
 import { useDispatch } from "react-redux";
-import { addReaction } from "./postsSclice";
+import { addReaction } from "./postsSlice";
 
 function Reaction({ postId, postReaction }) {
   const dispatch = useDispatch();
   const reactionList = {
     Like: "👍",
     Love: "❤️",
-    Haha: "😂",
-    Wow: "😯",
-    Sad: "😢",
-    Angry: "😡",
+    Fire: "🔥",
+    Rocket: "🚀",
+    Clap: "👏",
+    Unicorn: "🦄",
   };
   return (
     <CardActions>
       {Object.entries(reactionList).map(([reactionName, reactionValue]) => (
         <Button
-          size="small"
+          size="large"
           key={reactionName}
           onClick={() => dispatch(addReaction({ postId, reactionName }))}
         >
-          {reactionValue} {postReaction[reactionName]}
+          <span style={{ fontSize: "20px", marginRight: "10px" }}>
+            {reactionValue}
+          </span>
+          {postReaction[reactionName]}
         </Button>
       ))}
     </CardActions>

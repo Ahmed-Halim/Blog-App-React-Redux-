@@ -6,9 +6,8 @@ import Grid from "@mui/material/Grid";
 
 export default function Posts() {
   const posts = useSelector((state) => state.posts);
-
   return (
-    <Grid container style={{ margin: "20px auto", maxWidth: "500px" }}>
+    <Grid container style={{ margin: "20px auto", maxWidth: "600px" }}>
       <Grid item xs={12}>
         <PostForm />
       </Grid>
@@ -17,6 +16,7 @@ export default function Posts() {
           <Post
             key={post.id}
             postId={post.id}
+            date={post.date}
             title={post.title}
             category={post.category}
             body={post.body}

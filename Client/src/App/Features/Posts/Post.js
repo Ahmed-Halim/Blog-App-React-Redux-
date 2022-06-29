@@ -4,8 +4,9 @@ import Chip from "@mui/material/Chip";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
+import { parseISO, formatDistanceToNow } from "date-fns";
 
-function Post({ postId, title, category, body, reaction }) {
+function Post({ postId, date, title, category, body, reaction }) {
   return (
     <Card sx={{ mb: 3 }}>
       <CardContent>
@@ -13,6 +14,15 @@ function Post({ postId, title, category, body, reaction }) {
           {title}
         </Typography>
         <Chip label={category} variant="outlined" />
+        <Typography
+          sx={{ mt: 1, fontStyle: "italic", fontSize: 12 }}
+          color="text.secondary"
+        >
+          {formatDistanceToNow(parseISO(date), {
+            addSuffix: true,
+            includeSeconds: true,
+          })}
+        </Typography>
         <Typography
           style={{ marginTop: "20px" }}
           variant="body2"

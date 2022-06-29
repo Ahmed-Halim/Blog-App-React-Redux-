@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import postsReducer from "../App/Features/Posts/postsSclice";
+import postsReducer from "./Features/Posts/postsSlice";
+import formReducers from "./Features/Posts/formSlice";
 
 export const store = configureStore({
   reducer: {
     posts: postsReducer,
+    form: formReducers,
   },
 });

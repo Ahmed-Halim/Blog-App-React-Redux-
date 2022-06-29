@@ -1,23 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import SaveIcon from "@mui/icons-material/Save";
+import SendIcon from "@mui/icons-material/Send";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { useDispatch } from "react-redux";
-import { addPost } from "./postsSclice";
+import { useDispatch, useSelector } from "react-redux";
+import { addPost } from "./postsSlice";
+import { toggleForm } from "./formSlice";
 
-export default function PostForm() {
+function PostForm() {
   const dispatch = useDispatch();
-
+  const formState = useSelector((state) => state.form);
+  console.log("formState ", formState);
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [body, setBody] = useState("");
-
+  const Categories = [
+    "Social Media",
+    "Gaming",
+    "Education",
+    "Technology",
+    "Health",
+    "Food",
+    "Travel",
+    "News",
+  ];
   const ResetForm = () => {
     setTitle("");
     setCategory("");
@@ -31,7 +43,18 @@ export default function PostForm() {
     }
   };
 
-  return (
+  return !formState ? (
+    <Button
+      fullWidth
+      style={{ padding: "15px", marginBottom: "20px" }}
+      onClick={() => dispatch(toggleForm())}
+      variant="contained"
+      size="large"
+      startIcon={<AddCircleIcon />}
+    >
+      New Post
+    </Button>
+  ) : (
     <Box
       component="form"
       sx={{
@@ -61,16 +84,20 @@ export default function PostForm() {
               value={category}
               onChange={(e) => setCategory(e.target.value)}
             >
-              <MenuItem value="Education">Education</MenuItem>
-              <MenuItem value="Sport">Sport</MenuItem>
-              <MenuItem value="Food">Food</MenuItem>
+              {Categories.map((category) => {
+                return (
+                  <MenuItem key={category} value={category}>
+                    {category}
+                  </MenuItem>
+                );
+              })}
             </Select>
           </FormControl>
         </Grid>
       </Grid>
       <TextField
         multiline={true}
-        rows={3}
+        rows={4}
         style={{ marginBottom: "20px" }}
         id="outlined-basic"
         label="Body"
@@ -78,16 +105,34 @@ export default function PostForm() {
         value={body}
         onChange={(e) => setBody(e.target.value)}
       ></TextField>
-      <Button
-        fullWidth
-        style={{ padding: "15px", marginBottom: "20px" }}
-        onClick={handleSubmit}
-        variant="contained"
-        size="large"
-        endIcon={<SaveIcon />}
-      >
-        Save
-      </Button>
+
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
+          <Button
+            fullWidth
+            style={{ padding: "15px", marginBottom: "20px" }}
+            onClick={() => dispatch(toggleForm())}
+            variant="outlined"
+            size="large"
+          >
+            Close
+          </Button>
+        </Grid>
+        <Grid item xs={6}>
+          <Button
+            fullWidth
+            style={{ padding: "15px", marginBottom: "20px" }}
+            onClick={handleSubmit}
+            variant="contained"
+            size="large"
+            endIcon={<SendIcon />}
+          >
+            Share
+          </Button>
+        </Grid>
+      </Grid>
     </Box>
   );
 }
+
+export default memo(PostForm);
