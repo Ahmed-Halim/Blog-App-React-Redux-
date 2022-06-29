@@ -22,7 +22,7 @@ function Reaction({ postId, postReaction }) {
           key={reactionName}
           onClick={() => dispatch(addReaction({ postId, reactionName }))}
         >
-          <span style={{ fontSize: "20px", marginRight: "10px" }}>
+          <span style={{ fontSize: "26px", marginRight: "10px" }}>
             {reactionValue}
           </span>
           {postReaction[reactionName]}

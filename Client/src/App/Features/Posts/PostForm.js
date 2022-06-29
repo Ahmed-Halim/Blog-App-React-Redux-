@@ -1,4 +1,6 @@
 import React, { useState, memo } from "react";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -16,10 +18,11 @@ import { toggleForm } from "./formSlice";
 function PostForm() {
   const dispatch = useDispatch();
   const formState = useSelector((state) => state.form);
-  console.log("formState ", formState);
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [body, setBody] = useState("");
+  const [open, setOpen] = useState(false);
+
   const Categories = [
     "Social Media",
     "Gaming",
@@ -40,6 +43,7 @@ function PostForm() {
     if (title && category && body) {
       dispatch(addPost({ title, category, body }));
       ResetForm();
+      setOpen(true);
     }
   };
 
@@ -131,6 +135,19 @@ function PostForm() {
           </Button>
         </Grid>
       </Grid>
+      <Snackbar
+        open={open}
+        autoHideDuration={5000}
+        onClose={() => setOpen(false)}
+      >
+        <Alert
+          onClose={() => setOpen(false)}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          Post added successfuly !
+        </Alert>
+      </Snackbar>
     </Box>
   );
 }
