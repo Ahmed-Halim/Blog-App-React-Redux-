@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React from "react";
 import Reaction from "./Reaction.js";
 import Chip from "@mui/material/Chip";
 import Card from "@mui/material/Card";
@@ -36,4 +36,4 @@ function Post({ postId, date, title, category, body, reaction }) {
   );
 }
 
-export default memo(Post);
+export default Post;
