@@ -1,4 +1,6 @@
 import React from "react";
+import CardActions from "@mui/material/CardActions";
+import Button from "@mui/material/Button";
 import { useDispatch } from "react-redux";
 import { addReaction } from "./postsSclice";
 
@@ -13,19 +15,17 @@ function Reaction({ postId, postReaction }) {
     Angry: "😡",
   };
   return (
-    <>
-      <div>
-        Reaction:
-        {Object.entries(reactionList).map(([reactionName, reactionValue]) => (
-          <button
-            key={reactionName}
-            onClick={() => dispatch(addReaction({ postId, reactionName }))}
-          >
-            {reactionValue} {postReaction[reactionName]}
-          </button>
-        ))}
-      </div>
-    </>
+    <CardActions>
+      {Object.entries(reactionList).map(([reactionName, reactionValue]) => (
+        <Button
+          size="small"
+          key={reactionName}
+          onClick={() => dispatch(addReaction({ postId, reactionName }))}
+        >
+          {reactionValue} {postReaction[reactionName]}
+        </Button>
+      ))}
+    </CardActions>
   );
 }
 
