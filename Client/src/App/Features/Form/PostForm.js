@@ -12,7 +12,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useDispatch, useSelector } from "react-redux";
-import { addPost } from "./postsSlice";
+import { addPost } from "../Posts/postsSlice";
 import { toggleForm } from "./formSlice";
 
 function PostForm() {

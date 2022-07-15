@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import Post from "./Post";
-import PostForm from "./PostForm";
+import PostForm from "../Form/PostForm";
 import Grid from "@mui/material/Grid";
 
 export default function Posts() {
